@@ -10,7 +10,7 @@ ScoreSystem::ScoreSystem(QObject *parent) : QObject(parent),
 void ScoreSystem::setScore(int score)
 {
     mScore += score;
-    mScoreText = mScoreText.arg(mScore);
+    mScoreText = QString("Score: %1").arg(mScore);
     emit scoreChanged();
 }
 

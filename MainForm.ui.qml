@@ -46,7 +46,7 @@ Rectangle {
         id: idTextScore
         x: 30
         y: 46
-        text: ccManager.scoreSystem.score;
+        text: ccScore.score;
     }
 
     Button {

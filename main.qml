@@ -7,7 +7,7 @@ Window {
     height: 600;
 
     Component.onCompleted: {
-        idMainForm.textScore.text = ccScore.score
+        //idMainForm.textScore.text = ccScore.score
 
     }
 
@@ -15,9 +15,10 @@ Window {
         target: ccManager
         onStateChanged: {
             if(state) {
-              idMainForm.textScore.text = "hit!"
+
+              //idMainForm.textScore.text = "hit!"
             } else {
-                idMainForm.textScore.text = "miss"
+                //idMainForm.textScore.text = "miss"
             }
         }
 
@@ -37,6 +38,9 @@ Window {
         anchors.fill: parent;
         buttonNewGame.onClicked: {
             ccManager.newGame()
+        }
+        mouseArea.onClicked: {
+             ccManager.reportClick(new Date().getMilliseconds())
         }
     }
 }
