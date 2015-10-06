@@ -5,11 +5,11 @@ Rectangle {
     id: idAppMainWindow
 
     property alias textScore: idTextScore
-    property alias mouseArea: idMouseArea
     property alias buttonNewGame: idButtonNewGame
+    property alias rowGameArea: idMainRowGameContainer;
 
-    width: 800
-    height: 600
+    width: 300
+    height: 300
     color:  "transparent"
     radius: 0
     border.width: 0
@@ -18,50 +18,44 @@ Rectangle {
         id: idAppMainColumn
         x: 0
         y: 0
-        width: 800
-        height: 600
+        width: 300
+        height: 300
 
 
         Row {
             id: idMainRowInfo
-            width: 800
-            height: 100
+            width: 300
+            height: 50
             clip: false
 
             Flow {
                 id: idMainRowInfoFlow
-                width: 800
-                height: 100
+                width: 300
+                height: 50
             }
         }
 
         Row {
             id: idMainRowGameContainer
-            width: 800
-            height: 500
+            width: 300
+            height: 250
         }
     }
 
     Label {
         id: idTextScore
-        x: 30
-        y: 46
+        x: 8
+        y: 8
         text: ccScore.score;
     }
 
     Button {
         id: idButtonNewGame
-        x: 678
-        y: 42
+        x: 202
+        y: 9
+        width: 90
+        height: 16
         text: qsTr("New Game")
-    }
-
-    MouseArea {
-        id: idMouseArea
-        x: 8
-        y: 111
-        width: 784
-        height: 481
     }
 }
 

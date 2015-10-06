@@ -17,21 +17,20 @@ public:
     ScoreSystem *scoreSystem; //score system
 
 signals:
-    void clickHandled(bool result);
-    void stateChanged(bool state);
+    void clickHandled(bool result, unsigned long id);
+    void spriteRequested();
 
 
 public slots:
     /**
      * @brief reportClick
-     * @param when the click has happened, since epoch in milliseconds
+     * @param timeToClick how long it took user to click, after game block was created
      */
-    void reportClick(int when);
+    void reportClick(int timeToClick, int id);
     /**
      * @brief newGame reset the socre and start a new game
      */
     void newGame();
-
 
 private:
     /**
@@ -42,6 +41,7 @@ private:
     //TODO check if ulong would not make problem in other platforms
     //SEE http://stackoverflow.com/questions/16177295/
 
+    void delay(int seconds);
 };
 
 #endif // GAMEMANAGER_H
