@@ -4,6 +4,8 @@
 #include <QObject>
 #include <scoresystem.h>
 
+#define MIN_TIME_TO_CLICK 1000
+
 class GameManager : public QObject
 {
     Q_OBJECT

@@ -32,9 +32,11 @@ void GameManager::reportClick(int timeToClick, int id) {
               << timeToClick << " millisecond"
               << std::endl;
 
-    if(timeToClick < 1000) {
+    if(timeToClick < MIN_TIME_TO_CLICK) {
         emit clickHandled(true, id);
-        scoreSystem->setScore(1000 - timeToClick);
+
+        //give score, it is the time taken to click
+        scoreSystem->setScore(timeToClick);
 
     } else { //it was a missed click!
         emit clickHandled(false, id);
