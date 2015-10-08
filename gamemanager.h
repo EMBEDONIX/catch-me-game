@@ -4,6 +4,14 @@
 #include <QObject>
 #include <scoresystem.h>
 
+//using boost for math operations
+
+//We use mt19937 with the default seed as a source of randomness.
+//The numbers produced will be the same every time the program is run
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_int_distribution.hpp>
+
+
 #define MIN_TIME_TO_CLICK 1000
 
 class GameManager : public QObject
@@ -17,6 +25,7 @@ public:
      * @brief mScoreSystem Reference to ScoreSystem
      */
     ScoreSystem *scoreSystem; //score system
+    int generateRandomNumberInRange(int min, int max);
 
 signals:
     void clickHandled(bool result, unsigned long id);
@@ -44,6 +53,9 @@ private:
     //SEE http://stackoverflow.com/questions/16177295/
 
     void delay(int seconds);
+
+    //random number generator according to mt19937
+    boost::random::mt19937 gen;
 };
 
 #endif // GAMEMANAGER_H

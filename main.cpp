@@ -4,6 +4,8 @@
 
 #include "gamemanager.h"
 
+#define DEBUG
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);

@@ -8,6 +8,7 @@
 #include <iostream>
 
 
+
 //game includes
 #include "gamemanager.h"
 #include "scoresystem.h"
@@ -18,12 +19,17 @@
 GameManager::GameManager(QObject *parent) : QObject(parent)
 {
 
-
 }
 
 GameManager::GameManager(ScoreSystem *scoreSystem)
 {
     this->scoreSystem = scoreSystem;
+}
+
+int GameManager::generateRandomNumberInRange(int min, int max)
+{
+    boost::random::uniform_int_distribution<> dist(min, max);
+    return dist(gen);
 }
 
 void GameManager::reportClick(int timeToClick, int id) {
@@ -36,32 +42,37 @@ void GameManager::reportClick(int timeToClick, int id) {
         emit clickHandled(true, id);
 
         //give score, it is the time taken to click
-        scoreSystem->setScore(timeToClick);
+        scoreSystem->setScore(MIN_TIME_TO_CLICK - timeToClick);
 
     } else { //it was a missed click!
         emit clickHandled(false, id);
     }
 
     //ask QML to add a new game sprite!
+    //random delay until next spawn
+    delay(generateRandomNumberInRange(100,800));
     emit spriteRequested();
 }
 
 void GameManager::newGame(){
 
     scoreSystem->resetScore();
-    delay(3);
+    delay(3000); //wait for 3 seconds
     emit spriteRequested();
 }
 
 
 unsigned long GameManager::getCurrentTimeInMilliSeconds(){
     return std::chrono::system_clock::now().time_since_epoch() /
-        std::chrono::milliseconds(1);
+            std::chrono::milliseconds(1);
 }
 
-void GameManager::delay(int seconds)
+void GameManager::delay(int milliseconds)
 {
-    QTime dieTime= QTime::currentTime().addSecs(seconds);
+#ifdef DEBUG
+    std::cout << "Delaying for " << milliseconds << " milliseconds" << std::endl;
+#endif
+    QTime dieTime= QTime::currentTime().addMSecs(milliseconds);
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }

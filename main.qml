@@ -61,10 +61,15 @@ Window {
           if(rect !== null ) {
               rect.index = idMainForm.blocks.length + 1;
               rect.creationTime = new Date();
+              //random x and y position
               rect.x =  Math.floor(Math.random() * 300 );
               rect.y = Math.floor(Math.random() * 230 );
+
+              //random width = height, at least 20px
+              rect.width = rect.height =
+                      Math.max(Math.floor(Math.random() * 30),
+                               idMainForm.rowGameArea.width / 20);
               idMainForm.blocks.push(rect);
-              //rect.dropped.connect(dropped);
         }
     }
 
